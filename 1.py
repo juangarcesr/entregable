@@ -1,46 +1,63 @@
 #se crea el repositorio
 class Sistema():
   def __init__(self):
-    pass
+    def __init__(self):
+        self.inventario = []
 
-  #Agregar nuevo implante. \n Editar. \n  Visualizar inventario. \n Eliminar.
-  #Registro de Pacientes y Asignación de Implantes: El sistema debe permitir asociar
-  #implantes específicos a pacientes, registrando información sobre la fecha de implantación,
-  #el médico responsable y el estado del implante en el paciente.
-  #Seguimiento de Implantes: Debe ser posible realizar un seguimiento de la vida útil de los
-  #implantes, incluyendo fechas de revisión y mantenimiento.
+    def agregar_implante(self, implante):
+        self.inventario.append(implante)
+
+    def eliminar_implante(self, implante):
+        self.inventario.remove(implante)
+
+    def editar_implante(self, implante, atributo, valor):
+        setattr(implante, atributo, valor)
+
+    def visualizar_inventario(self):
+        for implante in self.inventario:
+            print(implante)
+
+ #agregar nuevos implantes, eliminarlos, editar su información y visualizar el inventario completo.
 
 class Implante():
-  def __init__(self):
-    pass
+    def __init__(self, tipo, material, tamaño):
+        self.__tipo = tipo
+        self.__material = material
+        self.__tamaño = tamaño
 
-class ProtesisCadera(self):
-  def __init__(self):
-    self.__Material = material
-    self.__Fijación = fijación
-    self.__Tamaño = tamaño
+    def verTipo(self):
+       return self.__tipo
+    def verMaterial(self):
+       return self.__material
+    def verTamaño(self):
+       return self.__tamaño
+    
+    def asignarTipo(self,t):
+       self.__tipo=t
+    def asignarTamaño(self,ta):
+       self.__tamaño=ta
+    def asignarMaterial(self,m):
+       self.__material=m
 
-  def verMaterial (self):
-    return self.__nombre
-  def asignarMaterial (self, Material):
-    self.__Material = Material
+
+    def __str__(self):
+        return f'Tipo: {self.tipo}, Material: {self.material}, Tamaño: {self.tamaño}'
+
+class ProtesisCadera(Implante):
+  def __init__(self,material,fijacion,tamaño):
+    super().__init__(material,tamaño)
+    self.__Fijación = fijacion
 
   def verFijacion (self):
     return self.__Fijación
   def asignarFijacion (self, Fijación):
     self.__Fijación = Fijación
 
-  def verTamano (self):
-    return self.__Tamaño
-  def asignarTamano (self, Tamaño):
-    self.__Tamaño = Tamaño
-
-
-class StentCoronario(self, Longitud, diametro, material):
-  def __init__(self):
-    self.__Longitud = longitud
-    self.__Diametro = Diametro
-    self.__Material = material
+class StentCoronario(Implante):
+  def __init__(self,material,longitud,diametro,tamaño):
+     super().__init__(material,tamaño)
+     self.__Longitud = longitud
+     self.__Diametro = diametro      
 
   def verLongitud (self):
     return self.__Longitud
@@ -52,53 +69,46 @@ class StentCoronario(self, Longitud, diametro, material):
   def asignarDiametro (self, Diametro):
     self.__Diametro = Diametro
 
-  def verMaterial (self):
-    return self.__nombre
-  def asignarMaterial (self, Material):
-    self.__Material = Material
-
-class ImplanteDental(self, material, fijacion, tamano):
-  def __init__(self):
-    self.__Material = material
+class ImplanteDental(Implante):
+  
+  def __init__(self,material,fijacion,forma):
+    super().__init__(material)   
     self.__Fijación = fijacion
-    self.__Tamaño = tamano
+    self.__forma=forma
 
-  def verMaterial (self):
-    return self.__nombre
-  def asignarMaterial (self, Material):
-    self.__Material = Material
+  def verForma (self):
+    return self.__forma
+  def asignarFijacion (self, Fo):
+    self.__forma=Fo 
 
   def verFijacion (self):
     return self.__Fijación
   def asignarFijacion (self, Fijación):
     self.__Fijación = Fijación
 
-  def verTamano (self):
-    return self.__Tamaño
-  def asignarTamano (self, Tamaño):
-    self.__Tamaño = Tamaño
-
-class Marcapasos(self, electrodos,Tipo):
-  def __init__(self):
-    self.__NumeroElectrodos = electrodos
-    self.__Tipo = 0
-    self.__FrecuenciaEstimulación = Frecuencia
+class Marcapasos(Implante):
+  def __init__(self,NumElectrodos,tipo,frecuenciasEstimulacion):
+    super().__init__(tipo)
+    self.__NumeroElectrodos = NumElectrodos
+    self.__FrecuenciaEstimulacion = frecuenciasEstimulacion
 
   def verNumElectrodos (self):
     return self.__NumeroElectrodos
-  def asignarNumElectrodos (self, numElectrodos):
-    self.__NumeroElectrodos = NumeroElectrodos
-
-  def verTipo (self):
-    return self.__Tipo
-  def asignarTipo (self, Tipo):
-    self.__Tipo = Tipo
+  def asignarNumElectrodos (self, n):
+    self.__NumeroElectrodos = n
 
   def verFrecuenciaEstimulacion(self):
     return self.__FrecuenciaEstimulacion
-  def asignarFrecuenciaEstimulacion(self, frecuenciaEstimulacion):
-    self.__FrecuenciaEstimulacion = Frecuencia
+  def asignarFrecuenciaEstimulacion(self, e):
+    self.__FrecuenciaEstimulacion = e
 
 class ProtesisRodilla():
-  def __init__(self):
-    pass
+  def __init__(self,material,fijacion,tamaño):
+    super().__init__(material,tamaño)
+    self.__Fijación = fijacion
+
+  def verFijacion (self):
+    return self.__Fijación
+  def asignarFijacion (self, Fijación):
+    self.__Fijación = Fijación
+  
