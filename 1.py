@@ -2,13 +2,13 @@
 
 
 class Implante():
-    def __init__(self, tipo, material, tamaño,estado):
-        self.__tipo = tipo
+    def __init__(self, material, tamaño,estado):
+        #self.__tipo = tipo
         self.__material = material
         self.__tamaño = tamaño
         self.__estado=estado
-    def verTipo(self):
-       return self.__tipo
+   # def verTipo(self):
+     #  return self.__tipo
     def verMaterial(self):
        return self.__material
     def verTamaño(self):
@@ -16,8 +16,8 @@ class Implante():
     def verEstado(self):
        return self.__estado
     
-    def asignarTipo(self,t):
-       self.__tipo=t
+   # def asignarTipo(self,t):
+    #   self.__tipo=t
     def asignarTamaño(self,ta):
        self.__tamaño=ta
     def asignarMaterial(self,m):
@@ -59,8 +59,8 @@ class StentCoronario(Implante):
 
 class ImplanteDental(Implante):
   
-  def __init__(self,material,fijacion,forma,estado):
-    super().__init__(material,estado)   
+  def __init__(self,material,fijacion,forma,estado,tamaño):
+    super().__init__(material,estado,tamaño)   
     self.__Fijación = fijacion
     self.__forma=forma
 
@@ -75,8 +75,8 @@ class ImplanteDental(Implante):
     self.__Fijación = Fijación
 
 class Marcapasos(Implante):
-  def __init__(self,NumElectrodos,tipo,frecuenciasEstimulacion,estado):
-    super().__init__(tipo,estado)
+  def __init__(self,NumElectrodos,frecuenciasEstimulacion,estado,tamaño,material):
+    super().__init__(estado,tamaño,material)
     self.__NumeroElectrodos = NumElectrodos
     self.__FrecuenciaEstimulacion = frecuenciasEstimulacion
 
@@ -90,7 +90,7 @@ class Marcapasos(Implante):
   def asignarFrecuenciaEstimulacion(self, e):
     self.__FrecuenciaEstimulacion = e
 
-class ProtesisRodilla():
+class ProtesisRodilla(Implante):
   def __init__(self,material,fijacion,tamaño,estado):
     super().__init__(material,tamaño,estado)
     self.__Fijación = fijacion
@@ -120,6 +120,14 @@ class Sistema():
 
   def verificarExiste(self,c):
         return c in self.__inventario
+  def validar(msj):
+    while True:
+        try:
+            valor = int(input(msj))
+            break
+        except ValueError:
+            print("Ingrese un dato numérico...")
+    return valor
 
 def main():
     base = Sistema()
@@ -132,58 +140,50 @@ def main():
         5. Salir.
         > """)
         if menu == "1": 
-            pass 
-            b = Implante()
-            b.asignarTipo=input("ingrese el tipo de implante")
-            b.asignarTamaño = input("ingrese el tamaño del implante: ")
-            b.asignarEstado = input("ingrese el estado del implante: ")
-            b.asignarMaterial= input("ingrese el material del que está hecho el implante:  ")
-            
-
             tipo_implante = input("""Ingrese el tipo de implante que desea ingresar:
             1. protesis de cadera
             2. stent coronario
             3. implante dental
             4. marcapasos
-            5.protesis de rodilla 
-                                                                            
+            5. protesis de rodilla
             > """)
-            if tipo_implante == "1":
-                v=ProtesisCadera
-                v.asignarFijacion = input("ingrese el tipo de fijacion del implante: ")
-
-            elif tipo_implante == "2":
-                r=StentCoronario
-                r.asignarLongitud = input("ingrese la longitud del stent: ")
-                r.asignarDiametro=input("ingrese el diametro del stent: ")
-
-            elif tipo_implante == "3":
-                j=ImplanteDental
-                j.asignarForma = input("ingrese la forma del implante: ")
-                j.asignarFijacion=input("ingrese el tipo de fijacion del implante:")
+            #tipo = input("Ingrese el tipo de implante: ")
+            material = input("Ingrese el material del implante: ")
+            tamaño = input("Ingrese el tamaño del implante: ")
+            estado = input("Ingrese el estado del implante: ")
             
+            if tipo_implante == "1":
+                fijacion = input("Ingrese el tipo de fijación de la prótesis de cadera: ")
+                implante = ProtesisCadera( material, tamaño, estado, fijacion)
+            elif tipo_implante == "2":
+                longitud = input("Ingrese la longitud del stent coronario: ")
+                diametro = input("Ingrese el diámetro del stent coronario: ")
+                implante = StentCoronario( material,tamaño, longitud, diametro, estado)
+            elif tipo_implante == "3":
+                forma = input("Ingrese la forma del implante dental: ")
+                fijacion = input("Ingrese el tipo de fijación del implante dental: ")
+                implante = ImplanteDental( material, tamaño, estado, forma, fijacion)
             elif tipo_implante == "4":
-                t=Marcapasos
-                t.asignarFrecuenciaEstimulacion = input("ingrese la frecuencia de estimulación del marcapasos:  ")
-                t.asignarNumElectrodos=input("ingrese el numero de electrodos: ")
-
+                num_electrodos = input("Ingrese el número de electrodos del marcapasos: ")
+                frecuencia_estimulacion = input("Ingrese la frecuencia de estimulación del marcapasos: ")
+                implante = Marcapasos( material, tamaño, estado, num_electrodos, frecuencia_estimulacion)
             elif tipo_implante == "5":
-                q=ProtesisRodilla
-                q.asignarFijacion = input("ingrese la forma de fijación: ")
-
-            base.agregar_implante(b)
-        elif menu =="2" :
+                fijacion = input("Ingrese el tipo de fijación de la prótesis de rodilla: ")
+                implante = ProtesisRodilla( material, tamaño, estado, fijacion)
+            
+            base.agregar_implante(implante)
+        elif menu =="2":
             pass
         elif menu =="3":
            pass
-
+            
+       
+        
         elif menu =="5":
             break
         else:
-            print("salió del sistema.")
+            print("Salió del sistema.")
             break
 
 if __name__ == '__main__':
     main()
-
-
