@@ -133,16 +133,55 @@ def main():
         > """)
         if menu == "1": 
             pass 
+            b = Implante()
+            b.asignarTipo=input("ingrese el tipo de implante")
+            b.asignarTamaño = input("ingrese el tamaño del implante: ")
+            b.asignarEstado = input("ingrese el estado del implante: ")
+            b.asignarMaterial= input("ingrese el material del que está hecho el implante:  ")
             
-        elif menu ==2 :
+
+            tipo_implante = input("""Ingrese el tipo de implante que desea ingresar:
+            1. protesis de cadera
+            2. stent coronario
+            3. implante dental
+            4. marcapasos
+            5.protesis de rodilla 
+                                                                            
+            > """)
+            if tipo_implante == "1":
+                v=ProtesisCadera
+                v.asignarFijacion = input("ingrese el tipo de fijacion del implante: ")
+
+            elif tipo_implante == "2":
+                r=StentCoronario
+                r.asignarLongitud = input("ingrese la longitud del stent: ")
+                r.asignarDiametro=input("ingrese el diametro del stent: ")
+
+            elif tipo_implante == "3":
+                j=ImplanteDental
+                j.asignarForma = input("ingrese la forma del implante: ")
+                j.asignarFijacion=input("ingrese el tipo de fijacion del implante:")
+            
+            elif tipo_implante == "4":
+                t=Marcapasos
+                t.asignarFrecuenciaEstimulacion = input("ingrese la frecuencia de estimulación del marcapasos:  ")
+                t.asignarNumElectrodos=input("ingrese el numero de electrodos: ")
+
+            elif tipo_implante == "5":
+                q=ProtesisRodilla
+                q.asignarFijacion = input("ingrese la forma de fijación: ")
+
+            base.agregar_implante(b)
+        elif menu =="2" :
             pass
-        elif menu ==3:
+        elif menu =="3":
            pass
 
-        elif menu ==4:
-            pass
+        elif menu =="5":
+            break
         else:
             print("salió del sistema.")
+            break
 
 if __name__ == '__main__':
     main()
