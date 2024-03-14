@@ -25,6 +25,10 @@ class Implante():
        self.__material=m
     def asignarEstado(self,e):
        self.__estado=e
+    def asignarFmantenimiento(self,fmantenimiento):
+       self.__fmantenimiento = fmantenimiento
+    def asignarFrevision(self,frevision):
+       self.__frevision = frevision
 
     def __str__(self):
        return f'El estado del implante es{self.verEstado}'
@@ -98,15 +102,28 @@ class ProtesisRodilla(Implante):
   def asignarFijacion (self, Fijación):
     self.__Fijación = Fijación
 
-class Sistema():
-  
-  def __init__(self):
+class Sistema(Implante):
+  def __init__(self, material, tamaño,estado,frevision,fmantenimiento):
+        super().__init__(estado,tamaño,material,frevision, fmantenimiento)
         self.__inventario = []
 
   def agregar_implante(self, implante):
         self.__inventario.append(implante)
         return True
   
+  def seguimientoImplante (self,frevision,fmantenimiento):
+     self.__frevision = Implante.verfmantenimiento
+     self.__fmantenimiento = Implante.verfrevision
+     return self.__frevision
+     return self.__fmantenimiento
+  
+  def editar(self,material, tamaño,estado,frevision,fmantenimiento):
+     self.__material = Implante.asignarMaterial
+     self.__tamaño = Implante.asignarTamaño
+     self.__estado = Implante.asignarEstado
+     self.__frevision = Implante.asignarFrevision
+     self.__fmantenimiento = Implante.asignarFmantenimiento
+
   def eliminar_implante(self, implante):
         self.inventario.remove(implante)
   
