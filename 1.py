@@ -1,5 +1,6 @@
 #se crea el repositorio
 
+
 class Implante():
     def __init__(self, material, tamaño,estado,frevision,fmantenimiento):
         self.__material = material
@@ -31,8 +32,8 @@ class Implante():
        self.__frevision = frevision
 
     def __str__(self):
-       return f'El estado del implante es{self.verEstado} \n Tamaño: {self.verTamaño} \n Material: {self.verMaterial} \n Fecha de mantenimiento: {self.verfmantenimiento}\n Fecha de revisión: {self.verfrevision}'
-    
+       return f'el estado del implante es{self.verEstado}'
+
 class ProtesisCadera(Implante):
   def __init__(self,material,fijacion,tamaño,estado):
     super().__init__(material,tamaño,estado)
@@ -101,11 +102,11 @@ class ProtesisRodilla(Implante):
     return self.__Fijación
   def asignarFijacion (self, Fijación):
     self.__Fijación = Fijación
-
-class Sistema(Implante):
-  def __init__(self, material, tamaño,estado,frevision,fmantenimiento):
-        super().__init__(estado,tamaño,material,frevision, fmantenimiento)
+class Sistema():
+  
+  def __init__(self):
         self.__inventario = []
+        self.__pacientes=[]
 
   def agregar_implante(self, implante):
         self.__inventario.append(implante)
@@ -125,7 +126,25 @@ class Sistema(Implante):
      self.__fmantenimiento = Implante.asignarFmantenimiento
 
   def eliminar_implante(self, implante):
-        self.inventario.remove(implante)
+        if implante in self.__inventario:
+            self.__inventario.remove(implante)
+            print("Se eliminó el implante")
+        else:
+            print("no existe el implante")
+
+  def asignar_implante_a_paciente(self, cedula_paciente, tipo_implante, fecha_implantacion, medico_responsable, estado):
+        paciente_encontrado = False
+        for paciente in self.__pacientes:
+            if paciente.verCedula() == cedula_paciente:
+                for implante in self.__inventario:
+                    if isinstance(implante, tipo_implante):
+                        paciente.agregarProtesis(implante, fecha_implantacion, medico_responsable, estado)
+                        paciente_encontrado = True
+                        print("Implante asignado al paciente correctamente.")
+                        break
+                break
+        if not paciente_encontrado:
+            print("No se encontró al paciente o no hay implantes disponibles del tipo seleccionado.")
   
   def verNumeroImplantes(self):
         print("En el sistema hay: " + str(len(self.__inventario)) + " implantes")
@@ -136,14 +155,7 @@ class Sistema(Implante):
 
   def verificarExiste(self,c):
         return c in self.__inventario
-  def validar(msj):
-    while True:
-        try:
-            valor = int(input(msj))
-            break
-        except ValueError:
-            print("Ingrese un dato numérico...")
-    return valor
+  
 
 class Paciente():
   
@@ -182,9 +194,10 @@ def main():
         menu = input("""Seleccione una opción:
         1. Ingresar un nuevo implante.
         2. Eliminar un implante.
-        3. Selección de implante.
-        4. Editar datos de implante.
-        5. Salir.
+        3. Asingar una protesis a un paciente            
+        4. Verificar exixtencia de implante
+        5. visualizar inventario.
+        6. Salir.
         > """)
         if menu == "1": 
             tipo_implante = input("""Ingrese el tipo de implante que desea ingresar:
@@ -224,16 +237,14 @@ def main():
             print(base.eliminar_implante)
             
         elif menu =="3":
-           implante = input("Implante: ")
-           print(Implante.__str__)
-
-        elif menu == "4":
-           editar=input("Implante a editar:")
-           if editar == tipo_implante:
-              Sistema.editar
-
+           pass
+            
+       
+        
         elif menu =="5":
-            break
+            pass
+        elif menu=="6":
+           break
         else:
             print("Salió del sistema.")
             break
