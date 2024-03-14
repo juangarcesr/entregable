@@ -29,8 +29,8 @@ class Implante():
     #def __str__(self): (NO SÉ SI SEA NECESARIO ESTE STR)
       #  return f'el tipo de implante es: {self.verTipotipo}, el material es {self.verMaterialmaterial}, Tamaño: {self.verMaterialtamaño}'   
     def __str__(self):
-       return f'el estado del implante es{self.verEstado}'
-
+       return f"Tipo: {self.verEstado}\nMaterial: {self.verMaterial}\nTamaño: {self.verTamaño}"
+    
 class ProtesisCadera(Implante):
   def __init__(self,material,fijacion,tamaño,estado):
     super().__init__(material,tamaño,estado)
@@ -99,6 +99,23 @@ class ProtesisRodilla(Implante):
     return self.__Fijación
   def asignarFijacion (self, Fijación):
     self.__Fijación = Fijación
+
+class Paciente():
+   def __init__(self,nombre,cedula):
+      self.__nombre=nombre
+      self.__cedula=cedula
+      self.Pacientes= {}
+    
+   def verMombre (self):
+    return self.__nombre
+   def verCedula(self):
+      return self.__cedula
+
+   def asignarNombre(self,n):
+      self.__nombre=n
+   def asignarCedula(self,c):
+      self.__cedula=c
+
 class Sistema():
   
   def __init__(self):
@@ -109,7 +126,12 @@ class Sistema():
         return True
   
   def eliminar_implante(self, implante):
-        self.inventario.remove(implante)
+        if implante in self.__inventario:
+            self.__inventario.remove(implante)
+            print("Se eliminó el implante")
+        else:
+            print("no existe el implante")
+
   
   def verNumeroImplantes(self):
         print("En el sistema hay: " + str(len(self.__inventario)) + " implantes")
