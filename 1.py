@@ -1,6 +1,5 @@
 #se crea el repositorio
 
-
 class Implante():
     def __init__(self, material, tamaño,estado,frevision,fmantenimiento):
         self.__material = material
@@ -27,11 +26,8 @@ class Implante():
     def asignarEstado(self,e):
        self.__estado=e
 
-
-    #def __str__(self): (NO SÉ SI SEA NECESARIO ESTE STR)
-      #  return f'el tipo de implante es: {self.verTipotipo}, el material es {self.verMaterialmaterial}, Tamaño: {self.verMaterialtamaño}'   
     def __str__(self):
-       return f'el estado del implante es{self.verEstado}'
+       return f'El estado del implante es{self.verEstado}'
 
 class ProtesisCadera(Implante):
   def __init__(self,material,fijacion,tamaño,estado):
