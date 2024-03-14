@@ -1,39 +1,36 @@
 #se crea el repositorio
 
-
+import datetime
 class Implante():
-    def __init__(self, material, tamaño,estado,frevision,fmantenimiento):
+    def __init__(self, material, tamaño,estado):
+        #self.__tipo = tipo
         self.__material = material
         self.__tamaño = tamaño
         self.__estado=estado
-        self.__frevision= frevision
-        self.__fmantenimiento= fmantenimiento
-  
+   # def verTipo(self):
+     #  return self.__tipo
     def verMaterial(self):
        return self.__material
     def verTamaño(self):
        return self.__tamaño
     def verEstado(self):
        return self.__estado
-    def verfmantenimiento(self):
-       return self.__fmantenimiento
-    def verfrevision(self):
-       return self.__frevision
-  
+    
+   # def asignarTipo(self,t):
+    #   self.__tipo=t
     def asignarTamaño(self,ta):
        self.__tamaño=ta
     def asignarMaterial(self,m):
        self.__material=m
     def asignarEstado(self,e):
        self.__estado=e
-    def asignarFmantenimiento(self,fmantenimiento):
-       self.__fmantenimiento = fmantenimiento
-    def asignarFrevision(self,frevision):
-       self.__frevision = frevision
 
+
+    #def __str__(self): (NO SÉ SI SEA NECESARIO ESTE STR)
+      #  return f'el tipo de implante es: {self.verTipotipo}, el material es {self.verMaterialmaterial}, Tamaño: {self.verMaterialtamaño}'   
     def __str__(self):
-       return f'el estado del implante es{self.verEstado}'
-
+       return f"Tipo: {self.verEstado}\nMaterial: {self.verMaterial}\nTamaño: {self.verTamaño}"
+    
 class ProtesisCadera(Implante):
   def __init__(self,material,fijacion,tamaño,estado):
     super().__init__(material,tamaño,estado)
@@ -102,6 +99,36 @@ class ProtesisRodilla(Implante):
     return self.__Fijación
   def asignarFijacion (self, Fijación):
     self.__Fijación = Fijación
+
+class Paciente():
+   def __init__(self,nombre,cedula):
+      self.__nombre=nombre
+      self.__cedula=cedula
+      self.__Protesis= []
+
+   def verProtesis(self):
+      return self.__Protesis 
+   def agregarProtesis(self, protesis, fecha_implantacion, medico_responsable, estado):
+        self.__protesis.append({
+            'protesis': protesis,
+            'fecha_implantacion': fecha_implantacion,
+            'medico_responsable': medico_responsable,
+            'estado': estado
+        }) 
+   def verMombre (self):
+    return self.__nombre
+   def verCedula(self):
+      return self.__cedula
+   def verProtesis(self):
+      return self.__protesis
+   
+   #def agregarProtesis(self, tipo_implante, protesis):
+    #  self.__protesis[tipo_implante] = protesis
+   def asignarNombre(self,n):
+      self.__nombre=n
+   def asignarCedula(self,c):
+      self.__cedula=c
+
 class Sistema():
   
   def __init__(self):
@@ -112,19 +139,6 @@ class Sistema():
         self.__inventario.append(implante)
         return True
   
-  def seguimientoImplante (self,frevision,fmantenimiento):
-     self.__frevision = Implante.verfmantenimiento
-     self.__fmantenimiento = Implante.verfrevision
-     return self.__frevision
-     return self.__fmantenimiento
-  
-  def editar(self,implante,material, tamaño,estado,frevision,fmantenimiento):
-     self.__material = Implante.asignarMaterial
-     self.__tamaño = Implante.asignarTamaño
-     self.__estado = Implante.asignarEstado
-     self.__frevision = Implante.asignarFrevision
-     self.__fmantenimiento = Implante.asignarFmantenimiento
-
   def eliminar_implante(self, implante):
         if implante in self.__inventario:
             self.__inventario.remove(implante)
@@ -156,37 +170,6 @@ class Sistema():
   def verificarExiste(self,c):
         return c in self.__inventario
   
-
-class Paciente():
-  
-  def __init__(self,id,implante,medico,fimplantacion, estadoimplante):
-     self.__id = id
-     self.__implante = implante
-     self.__medico = medico
-     self.__fimplantacion = fimplantacion
-     self.__estadoimplante = estadoimplante
-  
-  def verID (self):
-    return self.__id
-  def verImplante (self):
-    return self.__implante
-  def verMedico(self):
-    return self.__medico
-  def verFimplantacion (self):
-    return self.__fimplantacion
-  def verEstadoImplante (self):
-    return self.__estadoimplante
-
-  def asignarID (self,id):
-    self.__asignarID = id
-  def asignarImplante (self,implante):
-    self.__asignarImplante = implante
-  def asignarMedico(self, medico):
-    self.__asignarMEdico =medico
-  def asignarFimplantacion (self,fimplantacion):
-    self.__asignarFimplantacion = fimplantacion
-  def asignarEstadoImplantación (self,estadoImplantacion):
-    self.__asignarEstado = estadoImplantacion
 
 def main():
     base = Sistema()
@@ -233,14 +216,19 @@ def main():
             
             base.agregar_implante(implante)
         elif menu =="2":
-            implante = input("Implante a eliminar: ")
-            print(base.eliminar_implante)
-            
+            pass
         elif menu =="3":
-           pass
-            
-       
-        
+
+          cedula_paciente = input("Ingrese la cédula del paciente: ")
+          tipo_implante = ProtesisCadera  # Tipo de implante a asignar, podrías cambiarlo según el tipo deseado
+          fecha_implantacion = datetime.datetime.now()
+          medico_responsable = input("Ingrese el nombre del médico responsable: ")
+          estado = input("Ingrese el estado del implante: ")
+          base.asignar_implante_a_paciente(cedula_paciente, tipo_implante, fecha_implantacion, medico_responsable, estado)
+         
+
+          #pacientes.agregarProtesis(Paciente)
+
         elif menu =="5":
             pass
         elif menu=="6":
