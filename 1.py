@@ -1,6 +1,6 @@
 #se crea el repositorio
 
-
+import datetime
 class Implante():
     def __init__(self, material, tamaño,estado):
         #self.__tipo = tipo
@@ -104,13 +104,26 @@ class Paciente():
    def __init__(self,nombre,cedula):
       self.__nombre=nombre
       self.__cedula=cedula
-      self.Pacientes= {}
-    
+      self.__Protesis= []
+
+   def verProtesis(self):
+      return self.__Protesis 
+   def agregarProtesis(self, protesis, fecha_implantacion, medico_responsable, estado):
+        self.__protesis.append({
+            'protesis': protesis,
+            'fecha_implantacion': fecha_implantacion,
+            'medico_responsable': medico_responsable,
+            'estado': estado
+        }) 
    def verMombre (self):
     return self.__nombre
    def verCedula(self):
       return self.__cedula
-
+   def verProtesis(self):
+      return self.__protesis
+   
+   #def agregarProtesis(self, tipo_implante, protesis):
+    #  self.__protesis[tipo_implante] = protesis
    def asignarNombre(self,n):
       self.__nombre=n
    def asignarCedula(self,c):
@@ -120,6 +133,7 @@ class Sistema():
   
   def __init__(self):
         self.__inventario = []
+        self.__pacientes=[]
 
   def agregar_implante(self, implante):
         self.__inventario.append(implante)
@@ -132,6 +146,19 @@ class Sistema():
         else:
             print("no existe el implante")
 
+  def asignar_implante_a_paciente(self, cedula_paciente, tipo_implante, fecha_implantacion, medico_responsable, estado):
+        paciente_encontrado = False
+        for paciente in self.__pacientes:
+            if paciente.verCedula() == cedula_paciente:
+                for implante in self.__inventario:
+                    if isinstance(implante, tipo_implante):
+                        paciente.agregarProtesis(implante, fecha_implantacion, medico_responsable, estado)
+                        paciente_encontrado = True
+                        print("Implante asignado al paciente correctamente.")
+                        break
+                break
+        if not paciente_encontrado:
+            print("No se encontró al paciente o no hay implantes disponibles del tipo seleccionado.")
   
   def verNumeroImplantes(self):
         print("En el sistema hay: " + str(len(self.__inventario)) + " implantes")
@@ -142,14 +169,7 @@ class Sistema():
 
   def verificarExiste(self,c):
         return c in self.__inventario
-  def validar(msj):
-    while True:
-        try:
-            valor = int(input(msj))
-            break
-        except ValueError:
-            print("Ingrese un dato numérico...")
-    return valor
+  
 
 def main():
     base = Sistema()
@@ -157,9 +177,10 @@ def main():
         menu = input("""Seleccione una opción:
         1. Ingresar un nuevo implante.
         2. Eliminar un implante.
-        3. Selección de implante.
-        4. Editar datos de implante.
-        5. Salir.
+        3. Asingar una protesis a un paciente            
+        4. Verificar exixtencia de implante
+        5. visualizar inventario.
+        6. Salir.
         > """)
         if menu == "1": 
             tipo_implante = input("""Ingrese el tipo de implante que desea ingresar:
@@ -197,12 +218,21 @@ def main():
         elif menu =="2":
             pass
         elif menu =="3":
-           pass
-            
-       
-        
+
+          cedula_paciente = input("Ingrese la cédula del paciente: ")
+          tipo_implante = ProtesisCadera  # Tipo de implante a asignar, podrías cambiarlo según el tipo deseado
+          fecha_implantacion = datetime.datetime.now()
+          medico_responsable = input("Ingrese el nombre del médico responsable: ")
+          estado = input("Ingrese el estado del implante: ")
+          base.asignar_implante_a_paciente(cedula_paciente, tipo_implante, fecha_implantacion, medico_responsable, estado)
+         
+
+          #pacientes.agregarProtesis(Paciente)
+
         elif menu =="5":
-            break
+            pass
+        elif menu=="6":
+           break
         else:
             print("Salió del sistema.")
             break
