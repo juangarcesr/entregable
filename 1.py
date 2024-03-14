@@ -31,8 +31,8 @@ class Implante():
        self.__frevision = frevision
 
     def __str__(self):
-       return f'El estado del implante es{self.verEstado}'
-
+       return f'El estado del implante es{self.verEstado} \n Tamaño: {self.verTamaño} \n Material: {self.verMaterial} \n Fecha de mantenimiento: {self.verfmantenimiento}\n Fecha de revisión: {self.verfrevision}'
+    
 class ProtesisCadera(Implante):
   def __init__(self,material,fijacion,tamaño,estado):
     super().__init__(material,tamaño,estado)
@@ -117,7 +117,7 @@ class Sistema(Implante):
      return self.__frevision
      return self.__fmantenimiento
   
-  def editar(self,material, tamaño,estado,frevision,fmantenimiento):
+  def editar(self,implante,material, tamaño,estado,frevision,fmantenimiento):
      self.__material = Implante.asignarMaterial
      self.__tamaño = Implante.asignarTamaño
      self.__estado = Implante.asignarEstado
@@ -220,11 +220,18 @@ def main():
             
             base.agregar_implante(implante)
         elif menu =="2":
-            pass
+            implante = input("Implante a eliminar: ")
+            print(base.eliminar_implante)
+            
         elif menu =="3":
-           pass
+           implante = input("Implante: ")
+           print(Implante.__str__)
+
         elif menu == "4":
-           pass
+           editar=input("Implante a editar:")
+           if editar == tipo_implante:
+              Sistema.editar
+
         elif menu =="5":
             break
         else:
