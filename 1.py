@@ -2,22 +2,24 @@
 
 
 class Implante():
-    def __init__(self, material, tamaño,estado):
-        #self.__tipo = tipo
+    def __init__(self, material, tamaño,estado,frevision,fmantenimiento):
         self.__material = material
         self.__tamaño = tamaño
         self.__estado=estado
-   # def verTipo(self):
-     #  return self.__tipo
+        self.__frevision= frevision
+        self.__fmantenimiento= fmantenimiento
+  
     def verMaterial(self):
        return self.__material
     def verTamaño(self):
        return self.__tamaño
     def verEstado(self):
        return self.__estado
-    
-   # def asignarTipo(self,t):
-    #   self.__tipo=t
+    def verfmantenimiento(self):
+       return self.__fmantenimiento
+    def verfrevision(self):
+       return self.__frevision
+  
     def asignarTamaño(self,ta):
        self.__tamaño=ta
     def asignarMaterial(self,m):
@@ -99,6 +101,7 @@ class ProtesisRodilla(Implante):
     return self.__Fijación
   def asignarFijacion (self, Fijación):
     self.__Fijación = Fijación
+
 class Sistema():
   
   def __init__(self):
@@ -128,6 +131,37 @@ class Sistema():
         except ValueError:
             print("Ingrese un dato numérico...")
     return valor
+
+class Paciente():
+  
+  def __init__(self,id,implante,medico,fimplantacion, estadoimplante):
+     self.__id = id
+     self.__implante = implante
+     self.__medico = medico
+     self.__fimplantacion = fimplantacion
+     self.__estadoimplante = estadoimplante
+  
+  def verID (self):
+    return self.__id
+  def verImplante (self):
+    return self.__implante
+  def verMedico(self):
+    return self.__medico
+  def verFimplantacion (self):
+    return self.__fimplantacion
+  def verEstadoImplante (self):
+    return self.__estadoimplante
+
+  def asignarID (self,id):
+    self.__asignarID = id
+  def asignarImplante (self,implante):
+    self.__asignarImplante = implante
+  def asignarMedico(self, medico):
+    self.__asignarMEdico =medico
+  def asignarFimplantacion (self,fimplantacion):
+    self.__asignarFimplantacion = fimplantacion
+  def asignarEstadoImplantación (self,estadoImplantacion):
+    self.__asignarEstado = estadoImplantacion
 
 def main():
     base = Sistema()
@@ -176,9 +210,8 @@ def main():
             pass
         elif menu =="3":
            pass
-            
-       
-        
+        elif menu == "4":
+           pass
         elif menu =="5":
             break
         else:
